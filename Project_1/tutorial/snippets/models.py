@@ -4,14 +4,9 @@ from django.db import models
 LANGUAGE_CHOICES = (
     ('python','python'),
 )
-
-print(LANGUAGE_CHOICES)
-
 STYLE_CHOICES = (
     ('friently','friently'),
 )
-print(STYLE_CHOICES)
-
 
 class Snippet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
