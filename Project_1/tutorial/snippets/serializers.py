@@ -7,12 +7,8 @@ class SnippetSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Snippet
-        # fields = '__all__'
-        fields = ['id', 'title',]
-
-
-    
-
+        fields = '__all__'
+        # fields = ['id', 'title',]
 
     def create(self , validated_data):
         print(validated_data)
