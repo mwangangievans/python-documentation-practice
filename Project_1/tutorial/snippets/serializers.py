@@ -1,20 +1,21 @@
 from rest_framework import serializers
-from snippets.models import Snippet ,LANGUAGEE_CHOICES,STYLE_CHOICES
+from snippets.models import LANGUAGE_CHOICES,STYLE_CHOICES, Snippet
 # from tutorial.snippets.models import Snippet
 
 
-class SnippetSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(required=False,allow_blank=True,max_length=100)
-    code = serializers.CharField(style = {'base_template':'text_area.html'})
-    linenos = serializers.BooleanField(required=False)
-    language = serializers.ChoiceField(choices=LANGUAGEE_CHOICES , defaults='python')
-    style = serializers.ChoiceField(style=STYLE_CHOICES , default='friently')
+class SnippetSerializer(serializers.ModelSerializer):
+   
+    class Meta:
+        model = Snippet
+        fields = '__all__'
+
+    
 
 
     def create(self , validated_data):
+        print(validated_data)
         """create and return a new instance of snippet given the validated data..."""
-        return Snippet.object.create(**validated_data)
+        return Snippet.objects.create(**validated_data)
 
     def update(self , instance ,validated_data):
         instance.title = validated_data.get('title',instance.title)
